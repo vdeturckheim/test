@@ -5,7 +5,7 @@ var opbeat = require('opbeat').start({
   organizationId: '524b0487555c4ee29fefbb61cf3d6f1a',
   secretToken: '517f5411e5ac40a6ea5054a91b3b0b9bd6858883'
 })
-         
+
 
 const Hapi = require('hapi');
 
@@ -22,8 +22,9 @@ server.route({
 
 server.route({
     method: 'GET',
-    path: '/{name}',
+    path: '/crash',
     handler: function (request, reply) {
+        throw new Error('ponay');
         reply('Hello, ' + encodeURIComponent(request.params.name) + '!');
     }
 });
