@@ -9,6 +9,11 @@ var opbeat = require('opbeat').start({
 
 const Hapi = require('hapi');
 
+const caller = function (cb) {
+
+    return setImmediate(cb);
+};
+
 const server = new Hapi.Server();
 server.connection({ port: 3000 });
 
@@ -16,7 +21,18 @@ server.route({
     method: 'GET',
     path: '/',
     handler: function (request, reply) {
+
         reply('Hello, world!');
+    }
+});
+
+
+server.route({
+    method: 'GET',
+    path: '/caller',
+    handler: function (request, reply) {
+
+        caller(() => reply('Hello, world!'));
     }
 });
 
