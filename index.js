@@ -1,11 +1,11 @@
 'use strict';
 
-
 var opbeat = require('opbeat').start({
-  appId: 'f634e334f5',
+  appId: '78544d65cf',
   organizationId: '524b0487555c4ee29fefbb61cf3d6f1a',
   secretToken: '517f5411e5ac40a6ea5054a91b3b0b9bd6858883'
 })
+         
 
 const Hapi = require('hapi');
 
