@@ -11,6 +11,8 @@ const Hapi = require('hapi');
 
 const caller = function (cb) {
 
+    console.log((new Error()).stack)
+
     return setImmediate(cb);
 };
 
@@ -22,6 +24,7 @@ server.route({
     path: '/',
     handler: function (request, reply) {
 
+        console.log((new Error()).stack)
         reply('Hello, world!');
     }
 });
@@ -32,7 +35,14 @@ server.route({
     path: '/caller',
     handler: function (request, reply) {
 
-        caller(() => reply('Hello, world!'));
+        console.log((new Error()).stack)
+
+        caller(() => {
+
+            console.log((new Error()).stack)
+
+            reply('Hello, world!')
+        });
     }
 });
 
@@ -40,6 +50,8 @@ server.route({
     method: 'GET',
     path: '/crash',
     handler: function (request, reply) {
+        console.log((new Error()).stack)
+
         throw new Error('ponay');
         reply('Hello, ' + encodeURIComponent(request.params.name) + '!');
     }
